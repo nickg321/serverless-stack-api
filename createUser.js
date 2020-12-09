@@ -1,5 +1,5 @@
-import * as dynamoDb from './libs/dynamodb-lib';
 import handler from './libs/handler-lib';
+import dynamoDb from './libs/dynamodb-lib';
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
@@ -11,11 +11,7 @@ export const main = handler(async (event, context) => {
     },
   };
 
-  try {
-    await dynamoDb.put(params);
+  await dynamoDb.put(params);
 
-    return params.Item;
-  } catch (e) {
-    console.log(e.message);
-  }
+  return params.Item;
 });
